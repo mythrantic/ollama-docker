@@ -25,7 +25,11 @@ services:
     ports:
       - 9012:11434
     environment:
-      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_CONTEXT_LENGTH=128000
+      - OLLAMA_SCHED_SPREAD=0
+      - OLLAMA_NUM_PARALLEL=0
+      - OLLAMA_MAX_LOADED_MODELS=0
+      - OLLAMA_MAX_QUEUE=2048
     networks:
       - ollama-docker
     deploy:
@@ -33,6 +37,7 @@ services:
         reservations:
           devices:
             - driver: nvidia
+              #device_ids: ['0']
               count: all
               capabilities: [gpu]
 
